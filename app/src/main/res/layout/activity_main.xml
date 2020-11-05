@@ -8,4 +8,36 @@
         tools:context=".MainActivity"
         android:background="#000000">
 
+    <SurfaceView
+            android:id="@+id/cameraSurfaceView"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+<!--        <view-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/textScanResult"-->
+<!--                android:id="@+id/viewDivider"/>-->
+
+    <com.alphamovie.lib.AlphaMovieView
+            android:id="@+id/video_player"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:accuracy="0.4"
+            app:alphaColor="#00FF00"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+                android:layout_margin="20dp"
+                android:textColor="#FF0000"
+                android:text="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/textScanResult"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

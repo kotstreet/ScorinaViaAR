@@ -7,24 +7,25 @@
         android:layout_height="match_parent"
         tools:context=".VideoActivity">
 
-    <SurfaceView
-            android:id="@+id/SurfaceViewCamera"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+<!--    <SurfaceView-->
+<!--            android:id="@+id/SurfaceViewCamera"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"/>-->
 
 
     <com.alphamovie.lib.AlphaMovieView
             android:id="@+id/video_player"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:accuracy="0.45"
+            app:accuracy="0.4"
             app:alphaColor="#00FF00"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     <Button
             android:text="back"
             android:onClick="back"

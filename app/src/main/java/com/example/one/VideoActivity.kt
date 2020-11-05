@@ -42,7 +42,7 @@ class VideoActivity : AppCompatActivity(),
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         // наше SurfaceView имеет имя SurfaceViewCamera
-        preview = findViewById(R.id.SurfaceViewCamera);
+//        preview = findViewById(R.id.SurfaceViewCamera);
 
         surfaceHolder = preview!!.holder;
         surfaceHolder!!.addCallback(this);
