@@ -44,28 +44,6 @@ class MainActivity :AppCompatActivity() {
         else{
             setUpControlls()
         }
-
-//        alphaMovieView!!.setVideoFromAssets("blender_V20001-0168.mp4")
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        alphaMovieView?.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-//        alphaMovieView?.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-//        alphaMovieView?.stop()
-    }
-
-    override fun onStart() {
-        super.onStart()
-//        detector.setProcessor(processor)
     }
 
     private fun setUpControlls(){
@@ -109,13 +87,7 @@ class MainActivity :AppCompatActivity() {
                 if(ActivityCompat.checkSelfPermission(
                         this@MainActivity,
                         Manifest.permission.CAMERA
-                    )!=PackageManager.PERMISSION_GRANTED){//
-//                if (ActivityCompat.checkSelfPermission(
-//                        this,
-//                        Manifest.permission.CAMERA
-//                    ) != PackageManager.PERMISSION_GRANTED
-//                ) {
-//                    Toast.makeText(applicationContext,"Permission Denied",Toast.LENGTH_SHORT).show()
+                    )!=PackageManager.PERMISSION_GRANTED){
                     return
                 }
                 cameraSource.start(surfaceHolder)
@@ -134,25 +106,20 @@ class MainActivity :AppCompatActivity() {
                 val code = qrCodes.valueAt(0)
 
                 if(code.displayValue.startsWith("Музей")) {
-//                    detector.release()
-////                    this.release()
                     alphaMovieView!!.post() {
                         try {
                             alphaMovieView!!.visibility = View.VISIBLE
-                            alphaMovieView!!.setVideoFromAssets("blender_V20001-0168.mp4")
+                            alphaMovieView!!.setVideoFromAssets("blender_V20001-0168cutter.mp4")
                             alphaMovieView!!.setOnVideoEndedListener {
                                 alphaMovieView!!.visibility = View.INVISIBLE
-//                                Toast.makeText(applicationContext,"setOnVideoEndedListener",Toast.LENGTH_SHORT).show()
                             }
-
-                        } catch (e: Exception) {
-                        }
+                        } catch (e: Exception) {}
                     }
                 }else {
-                    textScanResult.post(){ textScanResult.text = code.displayValue }
+//                    textScanResult.post(){ textScanResult.text = code.displayValue }
                 }
             }else{
-                textScanResult.post(){ textScanResult.text = "0" }
+//                textScanResult.post(){ textScanResult.text = "0" }
             }
         }
     }
