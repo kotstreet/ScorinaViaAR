@@ -6,27 +6,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
-        android:background="#000000">
+        android:background="#000000"
+        android:configChanges="orientation|screenSize">
 
     <SurfaceView
             android:id="@+id/cameraSurfaceView"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    <com.alphamovie.lib.AlphaMovieView
-            android:id="@+id/video_player"
+    <com.github.rongi.rotate_layout.layout.RotateLayout
+
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:accuracy="0.45"
-            app:alphaColor="#00FF00"
-            android:visibility="invisible"
+            app:angle="0"
+            android:id="@+id/rotateLayoutView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent">    <!-- Specify rotate angle here -->
 
+        <com.alphamovie.lib.AlphaMovieView
+                android:id="@+id/video_player"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:accuracy="0.45"
+                app:alphaColor="#00FF00"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+    </com.github.rongi.rotate_layout.layout.RotateLayout>
 <!--        <TextView-->
 <!--                android:visibility=""-->
 <!--                android:layout_margin="20dp"-->

@@ -1,15 +1,17 @@
 package com.example.one
 
+import SimpleOrientationListener
 import android.Manifest
 import android.content.pm.PackageManager
-import android.media.MediaPlayer
-import android.media.MediaPlayer.OnCompletionListener
-import android.media.MediaPlayer.OnPreparedListener
-import android.net.Uri
+import android.content.res.Configuration
+import android.graphics.drawable.RotateDrawable
 import android.os.Bundle
 import android.util.SparseArray
+import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -28,6 +30,8 @@ class MainActivity :AppCompatActivity() {
     private lateinit var cameraSource: CameraSource
     private lateinit var detector: BarcodeDetector
     private var alphaMovieView: AlphaMovieView? = null
+    private lateinit var mOrientationListener: SimpleOrientationListener
+    private var oldOrientation:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,24 @@ class MainActivity :AppCompatActivity() {
         else{
             setUpControlls()
         }
+
+
+//        alphaMovieView!!.setVideoFromAssets("blender_V20001-0168cutter.mp4")
+
+        mOrientationListener = object : SimpleOrientationListener(this@MainActivity) {
+            override fun onSimpleOrientationChanged(orientation: Int) {
+                alphaMovieView!!.post {
+                    rotateLayoutView!!.angle =
+                        when(prevOrientation){
+                            1-> 90
+                            2-> 180
+                            3-> 270
+                            else -> 0
+                        }
+                }
+            }
+        }
+        mOrientationListener.enable()
     }
 
     private fun setUpControlls(){
@@ -101,13 +123,15 @@ class MainActivity :AppCompatActivity() {
         override fun release() {}
 
         override fun receiveDetections(detections: Detector.Detections<Barcode>?) {
-            if(detections!=null && detections.detectedItems.isNotEmpty()){
+            if(detections!=null && detections.detectedItems.isNotEmpty()
+                && !alphaMovieView!!.isPlaying){
                 val qrCodes: SparseArray<Barcode> = detections.detectedItems
                 val code = qrCodes.valueAt(0)
 
                 if(code.displayValue.startsWith("Музей")) {
                     alphaMovieView!!.post() {
                         try {
+
                             alphaMovieView!!.visibility = View.VISIBLE
                             alphaMovieView!!.setVideoFromAssets("blender_V20001-0168cutter.mp4")
                             alphaMovieView!!.setOnVideoEndedListener {
@@ -115,12 +139,35 @@ class MainActivity :AppCompatActivity() {
                             }
                         } catch (e: Exception) {}
                     }
-                }else {
+//                }else {
 //                    textScanResult.post(){ textScanResult.text = code.displayValue }
                 }
-            }else{
+//            }else{
 //                textScanResult.post(){ textScanResult.text = "0" }
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        alphaMovieView!!.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        alphaMovieView!!.onPause()
+    }
+
+    fun play(view: View?) {
+        alphaMovieView!!.start()
+    }
+
+    fun pause(view: View?) {
+        alphaMovieView!!.pause()
+    }
+
+    fun stop(view: View?) {
+        alphaMovieView!!.stop()
+    }
+
 }
