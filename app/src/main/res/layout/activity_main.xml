@@ -21,24 +21,29 @@
 
     <com.github.rongi.rotate_layout.layout.RotateLayout
 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:angle="0"
             android:id="@+id/rotateLayoutView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">    <!-- Specify rotate angle here -->
+            app:layout_constraintStart_toStartOf="parent">
+        <!-- Specify rotate angle here -->
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <com.alphamovie.lib.AlphaMovieView
                 android:id="@+id/video_player"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+
                 app:accuracy="0.45"
                 app:alphaColor="#00FF00"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"/>
+</RelativeLayout>
 
     </com.github.rongi.rotate_layout.layout.RotateLayout>
 <!--        <TextView-->

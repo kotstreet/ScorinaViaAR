@@ -5,7 +5,9 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.drawable.RotateDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.util.SparseArray
 import android.view.Surface
 import android.view.SurfaceHolder
@@ -48,9 +50,6 @@ class MainActivity :AppCompatActivity() {
         else{
             setUpControlls()
         }
-
-
-//        alphaMovieView!!.setVideoFromAssets("blender_V20001-0168cutter.mp4")
 
         mOrientationListener = object : SimpleOrientationListener(this@MainActivity) {
             override fun onSimpleOrientationChanged(orientation: Int) {
@@ -128,24 +127,36 @@ class MainActivity :AppCompatActivity() {
                 val qrCodes: SparseArray<Barcode> = detections.detectedItems
                 val code = qrCodes.valueAt(0)
 
-                if(code.displayValue.startsWith("Музей")) {
+                if(code.displayValue.startsWith("Музей Гомельского государственного университета")) {
                     alphaMovieView!!.post() {
                         try {
-
                             alphaMovieView!!.visibility = View.VISIBLE
-                            alphaMovieView!!.setVideoFromAssets("blender_V20001-0168cutter.mp4")
+                            alphaMovieView!!.setVideoFromAssets("Videos/Dobro_pozalovat_v_scoriny.mp4")
+
                             alphaMovieView!!.setOnVideoEndedListener {
                                 alphaMovieView!!.visibility = View.INVISIBLE
                             }
                         } catch (e: Exception) {}
                     }
-//                }else {
-//                    textScanResult.post(){ textScanResult.text = code.displayValue }
+                }else if(code.displayValue.startsWith("Книга - это мать")) {
+                        alphaMovieView!!.post() {
+                            try {
+                                alphaMovieView!!.visibility = View.VISIBLE
+                                alphaMovieView!!.setVideoFromAssets("Videos/Kniga_i_poznanie.mp4")
+                                alphaMovieView!!.setOnVideoEndedListener {
+                                    alphaMovieView!!.visibility = View.INVISIBLE
+                                }
+                            } catch (e: Exception) {
+                        }
+                    }
                 }
-//            }else{
-//                textScanResult.post(){ textScanResult.text = "0" }
             }
         }
+    }
+
+    override fun onStop(){
+        alphaMovieView!!.visibility = View.INVISIBLE
+        super.onStop()
     }
 
     override fun onResume() {
