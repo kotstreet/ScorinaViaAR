@@ -33,7 +33,7 @@ class MainActivity :AppCompatActivity() {
     private lateinit var detector: BarcodeDetector
     private var alphaMovieView: AlphaMovieView? = null
     private lateinit var mOrientationListener: SimpleOrientationListener
-    private var oldOrientation:Int = 0
+//    private var oldOrientation:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,6 +134,7 @@ class MainActivity :AppCompatActivity() {
                             alphaMovieView!!.setVideoFromAssets("Videos/Dobro_pozalovat_v_scoriny.mp4")
 
                             alphaMovieView!!.setOnVideoEndedListener {
+                                alphaMovieView!!.stop()
                                 alphaMovieView!!.visibility = View.INVISIBLE
                             }
                         } catch (e: Exception) {}
@@ -144,7 +145,8 @@ class MainActivity :AppCompatActivity() {
                                 alphaMovieView!!.visibility = View.VISIBLE
                                 alphaMovieView!!.setVideoFromAssets("Videos/Kniga_i_poznanie.mp4")
                                 alphaMovieView!!.setOnVideoEndedListener {
-                                    alphaMovieView!!.visibility = View.INVISIBLE
+                                    alphaMovieView!!.stop()
+                                    alphaMovieView!!.visibility = View.GONE
                                 }
                             } catch (e: Exception) {
                         }
