@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
 
-                app:accuracy="0.45"
+                app:accuracy="0.48"
                 app:alphaColor="#00FF00"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"

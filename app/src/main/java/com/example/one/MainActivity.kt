@@ -88,7 +88,8 @@ class MainActivity :AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if(requestCode == requestCodeCameraPermission && grantResults.isNotEmpty()){
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                setUpControlls()
+                this@MainActivity.recreate()
+//                setUpControlls()
             }else{
                 Toast.makeText(applicationContext, "Permission Denied", Toast.LENGTH_SHORT).show()
             }
@@ -132,22 +133,24 @@ class MainActivity :AppCompatActivity() {
                         try {
                             alphaMovieView!!.visibility = View.VISIBLE
                             alphaMovieView!!.setVideoFromAssets("Videos/Dobro_pozalovat_v_scoriny.mp4")
+//                            alphaMovieView!!.setLooping(false)
 
-                            alphaMovieView!!.setOnVideoEndedListener {
-                                alphaMovieView!!.stop()
-                                alphaMovieView!!.visibility = View.INVISIBLE
-                            }
+//                            alphaMovieView!!.setOnVideoEndedListener {
+//                                alphaMovieView!!.stop()
+//                                alphaMovieView!!.visibility = View.INVISIBLE
+//                            }
                         } catch (e: Exception) {}
                     }
                 }else if(code.displayValue.startsWith("Книга - это мать")) {
                         alphaMovieView!!.post() {
                             try {
                                 alphaMovieView!!.visibility = View.VISIBLE
+//                                alphaMovieView!!.setLooping(false)
                                 alphaMovieView!!.setVideoFromAssets("Videos/Kniga_i_poznanie.mp4")
-                                alphaMovieView!!.setOnVideoEndedListener {
-                                    alphaMovieView!!.stop()
-                                    alphaMovieView!!.visibility = View.GONE
-                                }
+//                                alphaMovieView!!.setOnVideoEndedListener {
+//                                    alphaMovieView!!.stop()
+//                                    alphaMovieView!!.visibility = View.GONE
+//                                }
                             } catch (e: Exception) {
                         }
                     }
@@ -156,31 +159,48 @@ class MainActivity :AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d("message","onStart")
+
+        alphaMovieView!!.setLooping(false)
+        alphaMovieView!!.setOnVideoEndedListener {
+            alphaMovieView!!.stop()
+            alphaMovieView!!.visibility = View.GONE
+        }
+    }
+
     override fun onStop(){
         alphaMovieView!!.visibility = View.INVISIBLE
         super.onStop()
+        Log.d("message","onStop")
     }
 
     override fun onResume() {
         super.onResume()
         alphaMovieView!!.onResume()
+        Log.d("message","onResume")
     }
 
     override fun onPause() {
         super.onPause()
         alphaMovieView!!.onPause()
+        Log.d("message","onPause")
     }
 
     fun play(view: View?) {
-        alphaMovieView!!.start()
+//        alphaMovieView!!.start()
+        Log.d("message","play")
     }
 
     fun pause(view: View?) {
         alphaMovieView!!.pause()
+        Log.d("message","pause")
     }
 
     fun stop(view: View?) {
         alphaMovieView!!.stop()
+        Log.d("message","stop")
     }
 
 }
